@@ -10,7 +10,7 @@ def run():
                     '172.24.173.15',
                     ssh_username='root',
                     ssh_password='ditec_8905',
-                    remote_bind_address=('127.0.0.1', 3306)
+                    remote_bind_address=('127.0.0.1', 3306),
                     server.start()
                     )
         except:
@@ -39,26 +39,6 @@ def run():
         return ok
 
     
-    # Cria a tabela manut_prog caso ela não exista
-    conecta_ssh()
-    conecta_bd()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS manut_prog (
-            id INT(11) NOT NULL AUTO_INCREMENT,
-            causa_banco BOOLEAN NOT NULL,
-            operadora ENUM('0', '1', '2') NOT NULL,
-            predio ENUM('CTA01', 'CTA03', 'CTA05', 'CTA06', 'CTA09') NOT NULL,
-            inicio DATETIME NOT NULL,
-            fim DATETIME NOT NULL,
-            justificativa TEXT NOT NULL,
-            funci VARCHAR(8) NOT NULL,
-            log_gravado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
-        )
-    """)
-    fecha_bd()
-    desconecta_ssh()
-
     # Página web com o formulário para inclusão dos dados
     st.write('# Inclusão de dados')
 
